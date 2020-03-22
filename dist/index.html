@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>react-mobx-tree</title>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width, shrink-to-fit=no" >			
+		<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+		<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" />
+		<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+	</head>
+	<body>
+		
+		<button onclick="window.tree.add()">ADD</button>
+		<button onclick="window.tree.del()">DEL</button>
+		<button onclick="window.tree.rename()">REN</button>
+		
+		<div id="tree"></div>
+		
+		<script src="./react-mobx-tree.js"></script> 
+
+		<script>
+		
+			let data = [ 
+				{id:1,  pid:0, o:1, t:'frontend'}, {id:2,  pid:1, o:2, t:'react'}, {id:3,  pid:1, o:3, t:'mobx'},
+				{id:4,  pid:0, o:1, t:'backend'}, {id:5,  pid:4, o:2, t:'express'}, {id:6,  pid:4, o:3, t:'sqlite3'},
+			];
+
+			function init_tree(json) {
+				
+				window.tree = null;
+
+				const treeoption = {
+					el: "tree",
+					data: json,
+					callback: {
+						add: function(node){ console.log('add callback!', node) },
+						sel: function(node){ console.log('sel callback!', node) },
+						upd: function(node){ console.log('upd callback!', node) },
+						del: function(node){ console.log('del callback!', node) },
+						dnd: function(node){ console.log('dnd callback!', node) },
+						rn1: function(node){ console.log('rn1 callback!', node) },
+						rn2: function(node){ console.log('rn2 callback!', node) },
+						rn3: function(node){ console.log('rn3 callback!', node) },
+						sec: function(node){ console.log('sec callback!', node) },
+						cls: function(node){ console.log('cls callback!', node) },
+						opn: function(node){ console.log('opn callback!', node) },
+					}
+				}
+				
+				window.tree = new Tree(treeoption);
+				
+			}
+			
+			init_tree(data)
+			
+		</script>		
+		
+	</body>
+</html>

@@ -1,0 +1,136 @@
+ul.rebo-tree {
+
+	// Variables
+	// -----------------------------------------------------------------------------
+	
+	$node_height : 44px;
+	$node_bgcolor : white;
+	
+	$hover_bgcolor : rgba(230, 230, 230, 0.795);
+	$hover_color : black;
+	
+	//$selected_bgcolor : rgba(219, 20, 136, 0.795);
+	$selected_bgcolor : rgba(20, 117, 219, 0.795);
+	$selected_color : white;
+	//$selected_shadowcolor : hsl(35,20,60);
+	//$selected_shadowcolor : hsl(5,10,65);
+	//$selected_shadowcolor : hsl(5,0,40);
+	$selected_shadowcolor : rgba(0,0,0,0);
+	
+	$secret_color : #d2d2d2;
+	
+	//$dnd_bgcolor : rgba(219, 20, 136, 0.795);
+	$dnd_bgcolor : rgba(20, 117, 219, 0.795);
+	$dnd_color : rgba(17, 124, 212, 0.849);
+	
+	$edit_bgcolor : $selected_color;
+	$edit_color : $selected_bgcolor;
+
+	$ul_indent : 20;
+	$ul_indent_base : -1;
+	$ul_indent_min : 35;
+	
+	$dnd_line_height : 2;
+	
+	// -----------------------------------------------------------------------------
+
+	& * { transition: transform 0.5s, background 0.5s; }
+	& {list-style : none; padding: 0; overflow:hidden;} // self
+	ul {list-style : none; padding: 0;} // children
+	input { border: 0; out-line: none; }
+
+	li { padding: 0; background: $node_bgcolor; }
+	li span { display: block; line-height: $node_height; cursor: pointer; }
+	// li * { pointer-events:none; }
+
+	li>span { padding-left: $ul_indent_min + $ul_indent * ($ul_indent_base + 1) + px; }
+	li>ul>li>span { padding-left: $ul_indent_min + $ul_indent * ($ul_indent_base + 2) + px; }
+	li>ul>li>ul>li>span { padding-left: $ul_indent_min + $ul_indent * ($ul_indent_base + 3) + px; }
+	li>ul>li>ul>li>ul>li>span { padding-left: $ul_indent_min + $ul_indent * ($ul_indent_base + 4) + px; }
+	li>ul>li>ul>li>ul>li>ul>li>span { padding-left: $ul_indent_min + $ul_indent * ($ul_indent_base + 5) + px; }
+	li>ul>li>ul>li>ul>li>ul>li>ul>li>span { padding-left: $ul_indent_min + $ul_indent * ($ul_indent_base + 6) + px; }
+	li>ul>li>ul>li>ul>li>ul>li>ul>li>ul>li>span { padding-left: $ul_indent_min + $ul_indent * ($ul_indent_base + 7) + px; }
+	li>ul>li>ul>li>ul>li>ul>li>ul>li>ul>li>ul>li>span { padding-left: $ul_indent_min + $ul_indent * ($ul_indent_base + 8) + px; }
+	li>ul>li>ul>li>ul>li>ul>li>ul>li>ul>li>ul>li>ul>li>span { padding-left: $ul_indent_min + $ul_indent * ($ul_indent_base + 9) + px; }
+	li>ul>li>ul>li>ul>li>ul>li>ul>li>ul>li>ul>li>ul>li>ul>li>span { padding-left: $ul_indent_min + $ul_indent * ($ul_indent_base + 10) + px; }
+	li>ul>li>ul>li>ul>li>ul>li>ul>li>ul>li>ul>li>ul>li>ul>li>ul>li>span { padding-left: $ul_indent_min + $ul_indent * ($ul_indent_base + 11) + px; }
+	li>ul>li>ul>li>ul>li>ul>li>ul>li>ul>li>ul>li>ul>li>ul>li>ul>li>ul>li>span { padding-left: $ul_indent_min + $ul_indent * ($ul_indent_base + 12) + px; }
+	li>ul>li>ul>li>ul>li>ul>li>ul>li>ul>li>ul>li>ul>li>ul>li>ul>li>ul>li>ul>li>span { padding-left: $ul_indent_min + $ul_indent * ($ul_indent_base + 13) + px; }
+	li>ul>li>ul>li>ul>li>ul>li>ul>li>ul>li>ul>li>ul>li>ul>li>ul>li>ul>li>ul>li>ul>li>span { padding-left: $ul_indent_min + $ul_indent * ($ul_indent_base + 14) + px; }
+	
+	li { position:relative; }
+	span.arrow { position: absolute; top: 0; z-index:1000; margin-left: -25px;}
+	span.title { display: block; z-index:999; word-break: break-all; }
+	span.title em { margin-left: 0px; font-style: normal; }
+	span.title:hover { background: $hover_bgcolor; color: $hover_color; }
+	span.title:hover + span.arrow { color: $hover_color; }
+	span.title.s1:hover + span.arrow { color: $selected_color; }
+
+	span.s1, span.s1:hover, span.e1 em input { 
+		background: $selected_bgcolor;
+		color: $selected_color;
+		font-weight: bold;
+		text-shadow: 
+			1px 1px 0px $selected_shadowcolor, 
+			2px 2px 0px $selected_shadowcolor, 
+			3px 3px 0px $selected_shadowcolor, 
+			4px 4px 0px $selected_shadowcolor;
+	}
+	span.s1 em {
+		display: inline-block;
+		transform: rotateX(360deg);
+	}
+	span.s1 em::after {
+		content: "_";
+	}	
+	span.s1 + span.arrow { 
+		font-weight: bold; 
+		color: white; 
+	}
+	
+	span.e1 em input {
+		background: $edit_bgcolor;
+		color: $edit_color;
+		display: inline;
+    padding: 2px 4px;
+		font-family: none;
+		font-size:1em;
+		margin-left: -4px;
+		
+	}	
+	
+	
+	span.s1.d-1, span.s1.d0, span.s1.d1 { 
+		background: $selected_bgcolor;
+		color: $selected_color;
+	}
+	span.s1.d0::before { 
+		background: $selected_color; 
+	}	
+
+	.dnd_emphasis { color: $dnd_color; }
+	span.d-1, span.d0, span.d1 { @extend .dnd_emphasis; }
+	span.d0::before { 
+		content: ""; position: absolute; left:0px; transform: translateX(-46px) rotate(45deg);
+		width:$node_height; height:$node_height; background: $dnd_bgcolor; 
+	}
+
+	span.title { position: relative; }
+	span.d-1::after, span.d1::after {
+		content: ""; position: absolute; left:0; right:0; width: 100%;
+		height: $dnd_line_height + px;
+		background: $dnd_bgcolor;
+	}
+	span.d-1::after {
+		top:-($dnd_line_height / 2)+px;
+	}
+	span.d1::after {
+		bottom:-($dnd_line_height / 2)+px;
+	}
+	span.sec1 em {
+		text-decoration: line-through;
+		color: $secret_color;
+	}
+
+
+}
